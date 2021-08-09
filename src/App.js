@@ -13,7 +13,6 @@ const App = () => {
 	const dispatch = useDispatch();
 
 	const fetchData = () => {
-		console.log("ftchn");
 		if (current === 1)
 			setTimeout(() => {
 				dispatch(actions.loadMoreItems(1, query));

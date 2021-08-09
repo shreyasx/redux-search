@@ -22,7 +22,7 @@ body {
 	width: 125px;
 }
 #searchbox {
-	background: url("./Slices/search.png") top left;
+	background: url("./search.png") top left;
 	background-size: contain;
 	background-repeat: no-repeat;
 	color: #fff;
