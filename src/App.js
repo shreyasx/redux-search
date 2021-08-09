@@ -48,7 +48,7 @@ const App = () => {
 			<InfiniteScroll
 				dataLength={items.length}
 				next={fetchData}
-				hasMore={current < 3}
+				hasMore={items.length > 4 && current < 3}
 				loader={<h4>Loading...</h4>}
 				endMessage={
 					<p style={{ textAlign: "center" }}>
