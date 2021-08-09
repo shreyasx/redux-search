@@ -6,25 +6,23 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import "./style.css";
 
 const App = () => {
-	const page1 = useSelector(state => state.page1);
-	const page2 = useSelector(state => state.page2);
-	const page3 = useSelector(state => state.page3);
-	const [items, setItems] = React.useState(page1);
-	const [current, setCurrent] = React.useState(1);
+	const items = useSelector(state => state.items);
+	const current = useSelector(state => state.current);
+
 	const dispatch = useDispatch();
 
 	const fetchData = () => {
 		if (current === 1)
 			setTimeout(() => {
-				setCurrent(2);
-				setItems([...page1, ...page2]);
-			}, 1000);
+				dispatch(actions.loadMoreItems(1));
+				dispatch(actions.setCurrent(2));
+			}, 500);
 
 		if (current === 2)
 			setTimeout(() => {
-				setCurrent(3);
-				setItems([...page1, ...page2, ...page3]);
-			}, 1000);
+				dispatch(actions.loadMoreItems(2));
+				dispatch(actions.setCurrent(3));
+			}, 500);
 	};
 
 	return (
@@ -40,7 +38,7 @@ const App = () => {
 					placeholder="Type to search..."
 					name="search"
 					id="searchbox"
-					onChange={event => dispatch(actions.searchPage1(event.target.value))}
+					onChange={event => dispatch(actions.filterMovies(event.target.value))}
 				/>
 			</div>
 			<InfiniteScroll
