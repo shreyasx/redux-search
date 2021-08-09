@@ -1,0 +1,32 @@
+body {
+	background-color: #000;
+	color: #fff;
+	font-family: sans-serif;
+}
+.cardlist {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+.card {
+	box-shadow: 1px 2px 5px 0px rgba(255, 255, 255, 0.75);
+	-webkit-box-shadow: 1px 2px 5px 0px rgba(255, 255, 255, 0.75);
+	-moz-box-shadow: 1px 2px 5px 0px rgba(255, 255, 255, 0.75);
+	border-radius: 10px;
+	padding: 30px;
+	margin: 20px;
+	text-align: center;
+	min-width: 200px;
+}
+.card img {
+	width: 125px;
+}
+#searchbox {
+	background: url("./Slices/search.png") top left;
+	background-size: contain;
+	background-repeat: no-repeat;
+	color: #fff;
+	height: 30px;
+	padding: 10px;
+	padding-left: 30px;
+}
