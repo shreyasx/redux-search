@@ -1,3 +1,5 @@
+import * as types from "./types";
+
 const page1 = require("./JSON/CONTENTLISTINGPAGE-PAGE1.json").page[
 	"content-items"
 ].content;
@@ -8,36 +10,37 @@ const page3 = require("./JSON/CONTENTLISTINGPAGE-PAGE3.json").page[
 	"content-items"
 ].content;
 
-const initialState = { items: page1, query: "", current: 1 };
+const initialState = { items: page1, current: 1 };
 
 export const reducer = (state = initialState, action = {}) => {
 	switch (action.type) {
-		case "LOAD_MORE_ITEMS":
+		case types.LOAD_MORE_ITEMS:
 			return state.current === 1
 				? {
 						...state,
 						items: [...page1, ...page2].filter(movie =>
-							movie.name.toLowerCase().includes(state.query)
+							movie.name.toLowerCase().includes(action.payload.query)
 						),
 				  }
 				: {
 						...state,
 						items: [...page1, ...page2, ...page3].filter(movie =>
-							movie.name.toLowerCase().includes(state.query)
+							movie.name.toLowerCase().includes(action.payload.query)
 						),
 				  };
 
-		case "SEARCH_MOVIES":
+		case types.SEARCH_MOVIES:
 			return {
 				...state,
-				query: action.payload.toLowerCase(),
 				current: 1,
-				items: page1.filter(movie =>
-					movie.name.toLowerCase().includes(action.payload.toLowerCase())
-				),
+				items: [...page1, ...page2, ...page3]
+					.filter(movie =>
+						movie.name.toLowerCase().includes(action.payload.toLowerCase())
+					)
+					.filter((movie, index) => index < 20),
 			};
 
-		case "SET_CURRENT":
+		case types.SET_CURRENT:
 			return { ...state, current: action.payload };
 
 		default:

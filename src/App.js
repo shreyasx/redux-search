@@ -8,19 +8,21 @@ import "./style.css";
 const App = () => {
 	const items = useSelector(state => state.items);
 	const current = useSelector(state => state.current);
+	const [query, setQuery] = React.useState("");
 
 	const dispatch = useDispatch();
 
 	const fetchData = () => {
+		console.log("ftchn");
 		if (current === 1)
 			setTimeout(() => {
-				dispatch(actions.loadMoreItems(1));
+				dispatch(actions.loadMoreItems(1, query));
 				dispatch(actions.setCurrent(2));
 			}, 500);
 
 		if (current === 2)
 			setTimeout(() => {
-				dispatch(actions.loadMoreItems(2));
+				dispatch(actions.loadMoreItems(2, query));
 				dispatch(actions.setCurrent(3));
 			}, 500);
 	};
@@ -38,7 +40,10 @@ const App = () => {
 					placeholder="Type to search..."
 					name="search"
 					id="searchbox"
-					onChange={event => dispatch(actions.filterMovies(event.target.value))}
+					onChange={event => {
+						dispatch(actions.filterMovies(event.target.value));
+						setQuery(event.target.value);
+					}}
 				/>
 			</div>
 			<InfiniteScroll
