@@ -32,7 +32,7 @@ export const reducer = (state = initialState, action = {}) => {
 				...state,
 				query: action.payload.toLowerCase(),
 				current: 1,
-				items: [...page1, ...page2, ...page3].filter(movie =>
+				items: page1.filter(movie =>
 					movie.name.toLowerCase().includes(action.payload.toLowerCase())
 				),
 			};
